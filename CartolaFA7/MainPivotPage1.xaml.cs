@@ -14,12 +14,13 @@ namespace CartolaFA7.View
 {
     public partial class MainPivotPage1 : PhoneApplicationPage
     {
+        private int mes;
         public MainPivotPage1()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnStatusMercado_Click(object sender, RoutedEventArgs e)
         {
             WebClient client = new WebClient();
             client.OpenReadCompleted += Client_OpenReadCompleted; ;
@@ -31,8 +32,67 @@ namespace CartolaFA7.View
         {
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(StatusMercadoJson));
             StatusMercadoJson res = (StatusMercadoJson)serializer.ReadObject(e.Result);
-            lblStatusMercado.Text = String.Format("Rodada Atual={0}\nTimes Escalados={1}\n",
-                    res.rodada_atual, res.times_escalados);
+         /*   if(res.fechamento.dia < 10)
+            {
+                string conc = "0" + res.fechamento.dia;
+                res.fechamento.dia = Convert.ToInt32(conc);
+            }
+            if (res.fechamento.mes < 10)
+            {
+                string conc = "0" + res.fechamento.mes;
+                mes = Convert.ToInt32(conc);
+                MessageBox.Show("" + mes);
+            }*/
+            lblStatusMercado.Text = String.Format("Rodada Atual = {0}\nTimes Escalados = {1}\nData de Fechamento = {2}/{3}/{4}\nHora de Fechamento= {5}:{6}",
+                    res.rodada_atual, res.times_escalados, res.fechamento.dia.ToString("00"), res.fechamento.mes.ToString("00"), res.fechamento.ano, 
+                    res.fechamento.hora.ToString("00"), res.fechamento.minuto.ToString("00"));
+        }
+
+        private void btnListarJogadores_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient client = new WebClient();
+            client.OpenReadCompleted += Client_ListarJogadores; ;
+            Uri uri = new Uri("https://api.cartolafc.globo.com/mercado/destaques", UriKind.Absolute);
+            client.OpenReadAsync(uri);
+        }
+
+        private void Client_ListarJogadores(object sender, OpenReadCompletedEventArgs e)
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Jogador>));
+            var res = (List<Jogador>)serializer.ReadObject(e.Result);
+
+               foreach(Jogador j in res)
+               {
+                   listJogadores.Items.Add(j.Atleta.nome + "\n" 
+                       +"Apelido: "+ j.Atleta.apelido + "\n"
+                       + "Cartoletas: " + j.Atleta.preco_editorial + "\n"
+                       + "Escalações: " + j.escalacoes + "\n"
+                       + "Clube: " + j.clube + "\n"
+                       + "Posição: " + j.posicao + "\n"
+                       );
+               }
+        }
+
+        private void btnJogadores_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient client = new WebClient();
+            client.OpenReadCompleted += client_OpenReadCompletedJogadoresParticipantes;
+            Uri uri = new Uri("https://api.cartolafc.globo.com/atletas/mercado", UriKind.Absolute);
+            client.OpenReadAsync(uri);
+        }
+
+        private void client_OpenReadCompletedJogadoresParticipantes(object sender, OpenReadCompletedEventArgs e)
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ListaAtletas));
+            var res = (ListaAtletas)serializer.ReadObject(e.Result);
+
+            foreach (var item in res.atletas)
+            {
+                listJogadoresParticipantes.Items.Add(item.nome + "\n"
+                    + "Apelido: " + item.apelido + "\n\n"                                     
+                    );
+            }
+
         }
 
         private void btnPatrocinadores_Click(object sender, RoutedEventArgs e)

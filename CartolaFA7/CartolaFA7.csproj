@@ -101,6 +101,14 @@
     </Compile>
     <Compile Include="Model\ListaPatrocinadores.cs" />
     <Compile Include="Model\Patrocinador.cs" />
+    <Compile Include="Model\Atleta.cs" />
+    <Compile Include="Model\clubes.cs" />
+    <Compile Include="Model\Jogador.cs" />
+    <Compile Include="Model\ListaAtletas.cs" />
+    <Compile Include="Model\Partida.cs" />
+    <Compile Include="Model\posicoes.cs" />
+    <Compile Include="Model\Scout.cs" />
+    <Compile Include="Model\status.cs" />
     <Compile Include="Model\StatusMercadoJson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
