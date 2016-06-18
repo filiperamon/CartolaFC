@@ -20,7 +20,7 @@
           
             <phone:PivotItem Header="Status do Mercado">
                 <StackPanel>
-                    <Button Name="btnStatusMercado" Content="Status Mercado" Click="Button_Click"/>
+                    <Button Name="btnStatusMercado" Content="Status Mercado" Click="btnStatusMercado_Click"/>
                     <TextBlock Name="lblStatusMercado"/>
                 </StackPanel>
             </phone:PivotItem>
@@ -44,7 +44,10 @@
             </phone:PivotItem>
 
             <phone:PivotItem Header="Jogadores Mais Escalados">
-                <Grid/>
+                <StackPanel>
+                    <Button Name="btnListarJogadores" Content="Listar Jogadores" Click="btnListarJogadores_Click"/>
+                    <ListBox Name="listJogadores" Height="529" />
+                </StackPanel>
             </phone:PivotItem>
 
             <phone:PivotItem Header="Clubes">
