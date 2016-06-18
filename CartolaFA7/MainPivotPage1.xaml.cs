@@ -20,7 +20,7 @@ namespace CartolaFA7.View
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnStatusMercado_Click(object sender, RoutedEventArgs e)
         {
             WebClient client = new WebClient();
             client.OpenReadCompleted += Client_OpenReadCompleted; ;
@@ -46,6 +46,31 @@ namespace CartolaFA7.View
             lblStatusMercado.Text = String.Format("Rodada Atual = {0}\nTimes Escalados = {1}\nData de Fechamento = {2}/{3}/{4}\nHora de Fechamento= {5}:{6}",
                     res.rodada_atual, res.times_escalados, res.fechamento.dia.ToString("00"), res.fechamento.mes.ToString("00"), res.fechamento.ano, 
                     res.fechamento.hora.ToString("00"), res.fechamento.minuto.ToString("00"));
+        }
+
+        private void btnListarJogadores_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient client = new WebClient();
+            client.OpenReadCompleted += Client_ListarJogadores; ;
+            Uri uri = new Uri("https://api.cartolafc.globo.com/mercado/destaques", UriKind.Absolute);
+            client.OpenReadAsync(uri);
+        }
+
+        private void Client_ListarJogadores(object sender, OpenReadCompletedEventArgs e)
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Jogador>));
+            var res = (List<Jogador>)serializer.ReadObject(e.Result);
+
+               foreach(Jogador j in res)
+               {
+                   listJogadores.Items.Add(j.Atleta.nome + "\n" 
+                       +"Apelido: "+ j.Atleta.apelido + "\n"
+                       + "Cartoletas: " + j.Atleta.preco_editorial + "\n"
+                       + "Escalações: " + j.escalacoes + "\n"
+                       + "Clube: " + j.clube + "\n"
+                       + "Posição: " + j.posicao + "\n"
+                       );
+               }
         }
     }
 }
