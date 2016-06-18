@@ -61,7 +61,9 @@ namespace CartolaFA7.View
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Jogador>));
             var res = (List<Jogador>)serializer.ReadObject(e.Result);
 
-               foreach(Jogador j in res)
+            listJogadores.ItemsSource = res;
+
+           /*    foreach(Jogador j in res)
                {
                    listJogadores.Items.Add(j.Atleta.nome + "\n" 
                        +"Apelido: "+ j.Atleta.apelido + "\n"
@@ -70,7 +72,7 @@ namespace CartolaFA7.View
                        + "Clube: " + j.clube + "\n"
                        + "Posição: " + j.posicao + "\n"
                        );
-               }
+               }*/
         }
 
         private void btnJogadores_Click(object sender, RoutedEventArgs e)
