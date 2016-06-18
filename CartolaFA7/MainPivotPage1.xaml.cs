@@ -14,6 +14,7 @@ namespace CartolaFA7.View
 {
     public partial class MainPivotPage1 : PhoneApplicationPage
     {
+        private int mes;
         public MainPivotPage1()
         {
             InitializeComponent();
@@ -31,8 +32,20 @@ namespace CartolaFA7.View
         {
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(StatusMercadoJson));
             StatusMercadoJson res = (StatusMercadoJson)serializer.ReadObject(e.Result);
-            lblStatusMercado.Text = String.Format("Rodada Atual={0}\nTimes Escalados={1}\n",
-                    res.rodada_atual, res.times_escalados);
+         /*   if(res.fechamento.dia < 10)
+            {
+                string conc = "0" + res.fechamento.dia;
+                res.fechamento.dia = Convert.ToInt32(conc);
+            }
+            if (res.fechamento.mes < 10)
+            {
+                string conc = "0" + res.fechamento.mes;
+                mes = Convert.ToInt32(conc);
+                MessageBox.Show("" + mes);
+            }*/
+            lblStatusMercado.Text = String.Format("Rodada Atual = {0}\nTimes Escalados = {1}\nData de Fechamento = {2}/{3}/{4}\nHora de Fechamento= {5}:{6}",
+                    res.rodada_atual, res.times_escalados, res.fechamento.dia.ToString("00"), res.fechamento.mes.ToString("00"), res.fechamento.ano, 
+                    res.fechamento.hora.ToString("00"), res.fechamento.minuto.ToString("00"));
         }
     }
 }
