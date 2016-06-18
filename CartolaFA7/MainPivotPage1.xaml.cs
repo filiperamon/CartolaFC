@@ -11,11 +11,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Runtime.Serialization.Json;
 using CartolaFA7.Model;
-<<<<<<< HEAD
 using Newtonsoft.Json;
-=======
 using System.Threading.Tasks;
->>>>>>> a5ebf88c65125c32cc4e76575e49c2a2d30a5d34
 
 namespace CartolaFA7.View
 {

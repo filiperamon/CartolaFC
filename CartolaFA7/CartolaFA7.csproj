@@ -103,6 +103,7 @@
     <Compile Include="Model\Escudos.cs" />
     <Compile Include="Model\ModeloPartida.cs" />
     <Compile Include="Model\Partida.cs" />
+    <Compile Include="Model\PartidaProxRodada.cs" />
     <Compile Include="Model\Partidas.cs" />
     <Compile Include="Model\Rodada.cs" />
     <Compile Include="Model\ListaPatrocinadores.cs" />
@@ -111,7 +112,6 @@
     <Compile Include="Model\clubes.cs" />
     <Compile Include="Model\Jogador.cs" />
     <Compile Include="Model\ListaAtletas.cs" />
-    <Compile Include="Model\PartidaProxRodada.cs" />
     <Compile Include="Model\posicoes.cs" />
     <Compile Include="Model\Scout.cs" />
     <Compile Include="Model\status.cs" />
