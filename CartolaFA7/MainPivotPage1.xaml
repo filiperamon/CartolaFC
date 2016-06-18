@@ -36,7 +36,30 @@
             </phone:PivotItem>
 
             <phone:PivotItem Header="Lista de Partidas">
-                <Grid/>
+                <StackPanel>
+                    <ListBox Name="listaPartidas" ItemsSource="{Binding}" Height="599">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Width="200" Orientation="Vertical">
+                                            <Image HorizontalAlignment="Left" Height="60" Source="{Binding UrlEscudoMandante}"></Image>
+                                            <TextBlock FontSize="30" Text="{Binding NomeMandante}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Width="200" Orientation="Vertical">
+                                            <Image HorizontalAlignment="Left" Width="60" Height="60" Source="{Binding UrlEscudoVisitante}"></Image>
+                                            <TextBlock FontSize="30" Text="{Binding NomeVisitante}"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding LocalPartida}" FontSize="20" Margin="0,0,20,0"></TextBlock>
+                                        <TextBlock Text="{Binding DataPartida}"  FontSize="20"></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>                                
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
             </phone:PivotItem>
 
             <phone:PivotItem Header="Maior Pontuador">

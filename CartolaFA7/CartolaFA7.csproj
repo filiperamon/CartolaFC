@@ -99,6 +99,11 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Clube.cs" />
+    <Compile Include="Model\Escudos.cs" />
+    <Compile Include="Model\ModeloPartida.cs" />
+    <Compile Include="Model\Partida.cs" />
+    <Compile Include="Model\Partidas.cs" />
     <Compile Include="Model\StatusMercadoJson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
