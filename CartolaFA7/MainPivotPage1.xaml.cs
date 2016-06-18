@@ -7,29 +7,22 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using CartolaFA7.Resources;
-using CartolaFA7.Controller;
-using CartolaFA7.Model;
 using System.Runtime.Serialization.Json;
+using CartolaFA7.Model;
 
-namespace CartolaFA7
+namespace CartolaFA7.View
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class MainPivotPage1 : PhoneApplicationPage
     {
-        // Constructor
-        public MainPage()
+        public MainPivotPage1()
         {
             InitializeComponent();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            /*var statusMercado = new WSConsumer();
-            var lista = await statusMercado.MercadoStatus();
-            repositories.ItemsSource = lista;*/
-
             WebClient client = new WebClient();
-            client.OpenReadCompleted += Client_OpenReadCompleted;
+            client.OpenReadCompleted += Client_OpenReadCompleted; ;
             Uri uri = new Uri("https://api.cartolafc.globo.com/mercado/status", UriKind.Absolute);
             client.OpenReadAsync(uri);
         }
@@ -40,7 +33,6 @@ namespace CartolaFA7
             StatusMercadoJson res = (StatusMercadoJson)serializer.ReadObject(e.Result);
             lblStatusMercado.Text = String.Format("Rodada Atual={0}\nTimes Escalados={1}\n",
                     res.rodada_atual, res.times_escalados);
-
         }
     }
 }
