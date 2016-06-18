@@ -11,7 +11,7 @@ namespace CartolaFA7.Model
     public class Partidas
     {
         [DataMember(Name = "partidas")]
-        public List<Partida> partidas { get; set; }
+        public List<PartidaProxRodada> partidas { get; set; }
         [DataMember(Name = "clubes")]
         public Dictionary<int, Clube> clubes { get; set; }
         //public List<KeyValuePair<int, Clube>> clubes { get; set; }

@@ -11,12 +11,17 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Runtime.Serialization.Json;
 using CartolaFA7.Model;
+<<<<<<< HEAD
 using Newtonsoft.Json;
+=======
+using System.Threading.Tasks;
+>>>>>>> a5ebf88c65125c32cc4e76575e49c2a2d30a5d34
 
 namespace CartolaFA7.View
 {
     public partial class MainPivotPage1 : PhoneApplicationPage
     {
+        private int mes;
         public MainPivotPage1()
         {
             InitializeComponent();
@@ -63,7 +68,7 @@ namespace CartolaFA7.View
             atualizaListaJogosRodada(listaPartida);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnStatusMercado_Click(object sender, RoutedEventArgs e)
         {
             WebClient client = new WebClient();
             client.OpenReadCompleted += Client_OpenReadCompleted; ;
@@ -75,8 +80,114 @@ namespace CartolaFA7.View
         {
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(StatusMercadoJson));
             StatusMercadoJson res = (StatusMercadoJson)serializer.ReadObject(e.Result);
-            lblStatusMercado.Text = String.Format("Rodada Atual={0}\nTimes Escalados={1}\n",
-                    res.rodada_atual, res.times_escalados);
+         /*   if(res.fechamento.dia < 10)
+            {
+                string conc = "0" + res.fechamento.dia;
+                res.fechamento.dia = Convert.ToInt32(conc);
+            }
+            if (res.fechamento.mes < 10)
+            {
+                string conc = "0" + res.fechamento.mes;
+                mes = Convert.ToInt32(conc);
+                MessageBox.Show("" + mes);
+            }*/
+            lblStatusMercado.Text = String.Format("Rodada Atual = {0}\nTimes Escalados = {1}\nData de Fechamento = {2}/{3}/{4}\nHora de Fechamento= {5}:{6}",
+                    res.rodada_atual, res.times_escalados, res.fechamento.dia.ToString("00"), res.fechamento.mes.ToString("00"), res.fechamento.ano, 
+                    res.fechamento.hora.ToString("00"), res.fechamento.minuto.ToString("00"));
+        }
+
+        private void btnListarJogadores_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient client = new WebClient();
+            client.OpenReadCompleted += Client_ListarJogadores; ;
+            Uri uri = new Uri("https://api.cartolafc.globo.com/mercado/destaques", UriKind.Absolute);
+            client.OpenReadAsync(uri);
+        }
+
+        private void Client_ListarJogadores(object sender, OpenReadCompletedEventArgs e)
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Jogador>));
+            var res = (List<Jogador>)serializer.ReadObject(e.Result);
+
+            listJogadores.ItemsSource = res;
+
+           /*    foreach(Jogador j in res)
+               {
+                   listJogadores.Items.Add(j.Atleta.nome + "\n" 
+                       +"Apelido: "+ j.Atleta.apelido + "\n"
+                       + "Cartoletas: " + j.Atleta.preco_editorial + "\n"
+                       + "Escalações: " + j.escalacoes + "\n"
+                       + "Clube: " + j.clube + "\n"
+                       + "Posição: " + j.posicao + "\n"
+                       );
+               }*/
+        }
+
+        private void btnJogadores_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient client = new WebClient();
+            client.OpenReadCompleted += client_OpenReadCompletedJogadoresParticipantes;
+            Uri uri = new Uri("https://api.cartolafc.globo.com/atletas/mercado", UriKind.Absolute);
+            client.OpenReadAsync(uri);
+        }
+
+        private void client_OpenReadCompletedJogadoresParticipantes(object sender, OpenReadCompletedEventArgs e)
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ListaAtletas));
+            var res = (ListaAtletas)serializer.ReadObject(e.Result);
+
+            foreach (var item in res.atletas)
+            {
+                listJogadoresParticipantes.Items.Add(item.nome + "\n"
+                    + "Apelido: " + item.apelido + "\n\n"                                     
+                    );
+            }
+
+        }
+
+        private void PegarRodadasCompleted(object sender, OpenReadCompletedEventArgs e)
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(IList<Rodada>));
+            var res = (IList<Rodada>)serializer.ReadObject(e.Result);
+            Rodada rodada = res.ElementAt(0);
+
+            listRodadas.ItemsSource = res;
+
+            //foreach (var item in res)
+            //{
+               // listRodadas.Items.Add(string.Format("{0}) Inicio: {1}  Fim: {2}",item.rodada_id , item.inicio, item.fim));
+            //}
+
+           
+            //tbInicio.Text = rodada.inicio;
+            //tbFim.Text = rodada.fim;
+           
+        }
+
+        private void btnAtualizar_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient client = new WebClient();
+            client.OpenReadCompleted += PegarRodadasCompleted;
+            Uri uri = new Uri("https://api.cartolafc.globo.com/rodadas", UriKind.Absolute);
+            client.OpenReadAsync(uri);
+        }
+
+        private void btnPatrocinadores_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient client = new WebClient();
+            client.OpenReadCompleted += Client_OpenReadCompletedPatrocinadores;
+            Uri uri = new Uri("https://api.cartolafc.globo.com/patrocinadores", UriKind.Absolute);
+            client.OpenReadAsync(uri);        
+        }
+
+        private void Client_OpenReadCompletedPatrocinadores(object sender, OpenReadCompletedEventArgs e) 
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Patrocinador>));
+            var res = (List<Patrocinador>)serializer.ReadObject(e.Result);
+            foreach (var item in res)
+            {
+                ListboxPatrocinadores.Items.Add(item.nome);    
+            }                                    
         }
     }
 }

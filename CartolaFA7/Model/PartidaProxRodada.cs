@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CartolaFA7.Model
 {
     [DataContract]
-    public class Partida
+    public class PartidaProxRodada
     {
         [DataMember(Name = "clube_casa_id")]
         public int ClubeMandanteId { get; set; }
@@ -22,6 +22,5 @@ namespace CartolaFA7.Model
         public string DataPartida { get; set; }
         [DataMember(Name = "local")]
         public string localPartida { get; set; }
-
     }
 }
