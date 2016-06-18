@@ -62,5 +62,23 @@ namespace CartolaFA7.View
             Uri uri = new Uri("https://api.cartolafc.globo.com/rodadas", UriKind.Absolute);
             client.OpenReadAsync(uri);
         }
+
+        private void btnPatrocinadores_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient client = new WebClient();
+            client.OpenReadCompleted += Client_OpenReadCompletedPatrocinadores;
+            Uri uri = new Uri("https://api.cartolafc.globo.com/patrocinadores", UriKind.Absolute);
+            client.OpenReadAsync(uri);        
+        }
+
+        private void Client_OpenReadCompletedPatrocinadores(object sender, OpenReadCompletedEventArgs e) 
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ListaPatrocinadores));
+            ListaPatrocinadores res = (ListaPatrocinadores)serializer.ReadObject(e.Result);
+            foreach (var item in res.listaPatrocinador)
+            {
+                ListboxPatrocinadores.Items.Add(item.nome);    
+            }                                    
+        }
     }
 }

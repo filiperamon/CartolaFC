@@ -27,7 +27,15 @@
 
          
             <phone:PivotItem Header="Lista Patrocinadores">
-                <Grid/>
+                <StackPanel>
+                    <Button Name="btnPatrocinadores" Content="Lista Patrocinadores" Click="btnPatrocinadores_Click"/>
+                    <TextBlock Name="lblPatroci"/>
+                    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+
+                        <ListBox Name="ListboxPatrocinadores"></ListBox>
+
+                    </Grid>
+                </StackPanel>
             </phone:PivotItem>
 
           
