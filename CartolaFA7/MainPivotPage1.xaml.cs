@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Runtime.Serialization.Json;
 using CartolaFA7.Model;
+using System.Threading.Tasks;
 
 namespace CartolaFA7.View
 {
@@ -33,6 +34,33 @@ namespace CartolaFA7.View
             StatusMercadoJson res = (StatusMercadoJson)serializer.ReadObject(e.Result);
             lblStatusMercado.Text = String.Format("Rodada Atual={0}\nTimes Escalados={1}\n",
                     res.rodada_atual, res.times_escalados);
+        }
+
+        private void PegarRodadasCompleted(object sender, OpenReadCompletedEventArgs e)
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(IList<Rodada>));
+            var res = (IList<Rodada>)serializer.ReadObject(e.Result);
+            Rodada rodada = res.ElementAt(0);
+
+            listRodadas.ItemsSource = res;
+
+            //foreach (var item in res)
+            //{
+               // listRodadas.Items.Add(string.Format("{0}) Inicio: {1}  Fim: {2}",item.rodada_id , item.inicio, item.fim));
+            //}
+
+           
+            //tbInicio.Text = rodada.inicio;
+            //tbFim.Text = rodada.fim;
+           
+        }
+
+        private void btnAtualizar_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient client = new WebClient();
+            client.OpenReadCompleted += PegarRodadasCompleted;
+            Uri uri = new Uri("https://api.cartolafc.globo.com/rodadas", UriKind.Absolute);
+            client.OpenReadAsync(uri);
         }
     }
 }

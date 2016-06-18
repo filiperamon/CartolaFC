@@ -32,7 +32,33 @@
 
           
             <phone:PivotItem Header="Datas das Rodadas">
-                <Grid/>
+                <Grid>
+                        
+                  <!--<TextBlockText="{Binding LineOne}"TextWrapping="Wrap"/>
+                  <TextBlockText="{Binding LineTwo}"TextWrapping="Wrap"/>-->
+                    
+                    <StackPanel>
+                        <ListBox Name="listRodadas" ItemsSource="{Binding}" Height="535" >
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical" Margin="2,2,2,10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Rodada "/>
+                                            <TextBlock Text="{Binding rodada_id}" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                        
+                                        <StackPanel Orientation="Horizontal" Margin="2,2,2,5" HorizontalAlignment="Center">
+                                            <TextBlock Name="tbInicio" Text="{Binding inicio,  StringFormat='{}{0:MM/dd/yy h:mm tt}'}"/>
+                                            <TextBlock Text=" Às " TextWrapping="Wrap"/>
+                                            <TextBlock Name="tbFim" Text="{Binding fim, StringFormat='{}{0:MM/dd/yy h:mm tt}'}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <Button Name="btnAtualizar" Content="Atualizar" Click="btnAtualizar_Click"/>
+                    </StackPanel>
+                </Grid>
             </phone:PivotItem>
 
             <phone:PivotItem Header="Lista de Partidas">
