@@ -105,9 +105,9 @@ namespace CartolaFA7.View
 
         private void Client_OpenReadCompletedPatrocinadores(object sender, OpenReadCompletedEventArgs e) 
         {
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ListaPatrocinadores));
-            ListaPatrocinadores res = (ListaPatrocinadores)serializer.ReadObject(e.Result);
-            foreach (var item in res.listaPatrocinador)
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Patrocinador>));
+            var res = (List<Patrocinador>)serializer.ReadObject(e.Result);
+            foreach (var item in res)
             {
                 ListboxPatrocinadores.Items.Add(item.nome);    
             }                                    
