@@ -34,5 +34,23 @@ namespace CartolaFA7.View
             lblStatusMercado.Text = String.Format("Rodada Atual={0}\nTimes Escalados={1}\n",
                     res.rodada_atual, res.times_escalados);
         }
+
+        private void btnPatrocinadores_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient client = new WebClient();
+            client.OpenReadCompleted += Client_OpenReadCompletedPatrocinadores;
+            Uri uri = new Uri("https://api.cartolafc.globo.com/patrocinadores", UriKind.Absolute);
+            client.OpenReadAsync(uri);        
+        }
+
+        private void Client_OpenReadCompletedPatrocinadores(object sender, OpenReadCompletedEventArgs e) 
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ListaPatrocinadores));
+            ListaPatrocinadores res = (ListaPatrocinadores)serializer.ReadObject(e.Result);
+            foreach (var item in res.listaPatrocinador)
+            {
+                ListboxPatrocinadores.Items.Add(item.nome);    
+            }                                    
+        }
     }
 }
