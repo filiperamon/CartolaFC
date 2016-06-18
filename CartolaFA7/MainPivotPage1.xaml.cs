@@ -72,5 +72,27 @@ namespace CartolaFA7.View
                        );
                }
         }
+
+        private void btnJogadores_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient client = new WebClient();
+            client.OpenReadCompleted += client_OpenReadCompletedJogadoresParticipantes;
+            Uri uri = new Uri("https://api.cartolafc.globo.com/atletas/mercado", UriKind.Absolute);
+            client.OpenReadAsync(uri);
+        }
+
+        private void client_OpenReadCompletedJogadoresParticipantes(object sender, OpenReadCompletedEventArgs e)
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ListaAtletas));
+            var res = (ListaAtletas)serializer.ReadObject(e.Result);
+
+            foreach (var item in res.atletas)
+            {
+                listJogadoresParticipantes.Items.Add(item.nome + "\n"
+                    + "Apelido: " + item.apelido + "\n\n"                                     
+                    );
+            }
+
+        }
     }
 }

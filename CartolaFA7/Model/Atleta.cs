@@ -12,6 +12,17 @@ namespace CartolaFA7.Model
         public string nome { get; set; }
         public string apelido { get; set; }
         public string foto { get; set; }
-        public int preco_editorial { get; set; }
+        public int preco_editorial { get; set; }                        
+        public int rodada_id { get; set; }
+        public int clube_id { get; set; }
+        public int posicao_id { get; set; }
+        public int status_id { get; set; }
+        public double pontos_num { get; set; }
+        public double preco_num { get; set; }
+        public double variacao_num { get; set; }
+        public double media_num { get; set; }
+        public int jogos_num { get; set; }
+        public Partida partida { get; set; }
+        public Scout scout { get; set; }
     }
 }

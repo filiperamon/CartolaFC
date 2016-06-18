@@ -55,7 +55,10 @@
             </phone:PivotItem>
 
             <phone:PivotItem Header="Jogadores" >
-                <Grid/>
+                <StackPanel>
+                    <Button Name="btnJogadores" Content="Jogadores Participantes" Click="btnJogadores_Click"/>
+                    <ListBox Name="listJogadoresParticipantes" Height="529" />
+                </StackPanel>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>
