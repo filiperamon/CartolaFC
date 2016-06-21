@@ -148,6 +148,26 @@
                     <ListBox Name="listJogadoresParticipantes" Height="529" />
                 </StackPanel>
             </phone:PivotItem>
+
+            <phone:PivotItem Header="Buscar Times">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Informe o nome do time:"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Name="tbNomeTime" Width="250"></TextBox>
+                        <Button Name="Buscar" Click="Buscar_Click">Buscar</Button>
+                    </StackPanel>
+                    <ListBox Name="listTimes" ItemsSource="{Binding}" Height="500">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Name="stkTime" Orientation="Horizontal" Margin="0,0,0,15" Tap="stkTime_Tap">
+                                    <Image Source="{Binding url_escudo_png}" Width="60" Height="60"></Image>
+                                    <TextBlock Text="{Binding nome}" VerticalAlignment="Center" FontSize="25" Margin="20,0,0,0"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </phone:PivotItem>
         </phone:Pivot>
     </Grid>
 

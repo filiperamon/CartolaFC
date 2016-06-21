@@ -186,5 +186,37 @@ namespace CartolaFA7.View
                 ListboxPatrocinadores.Items.Add(item.nome);    
             }                                    
         }
+
+        private void Buscar_Click(object sender, RoutedEventArgs e)
+        {
+            string criterioBusca = tbNomeTime.Text;
+
+            if (string.IsNullOrEmpty(criterioBusca))
+            {
+                MessageBox.Show("Informe um critério para busca.");
+                tbNomeTime.Focus();
+                return;
+            }
+            
+            WebClient times = new WebClient();
+            times.OpenReadCompleted += Times_OpenReadCompleted; ;
+            Uri uri = new Uri("https://api.cartolafc.globo.com/times?q=" + criterioBusca, UriKind.Absolute);
+            times.OpenReadAsync(uri);
+        }
+
+        private void Times_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
+        {
+            List<Time> times = JsonConvert.DeserializeObject<List<Time>>(new StreamReader(e.Result).ReadToEnd());
+
+            listTimes.ItemsSource = times;
+        }
+
+        private void stkTime_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Time time = (Time)(sender as FrameworkElement).DataContext;
+
+            NavigationService.Navigate(new Uri("/DetalhesTime.xaml?slugTime=" + time.slug, UriKind.Relative));
+
+        }
     }
 }
