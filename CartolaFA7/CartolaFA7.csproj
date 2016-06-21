@@ -99,7 +99,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\AtletaDestaque.cs" />
     <Compile Include="Model\Clube.cs" />
+    <Compile Include="Model\Destaques.cs" />
     <Compile Include="Model\DetalhesAtleta.cs" />
     <Compile Include="Model\DetalhesTime.cs" />
     <Compile Include="Model\Escudos.cs" />

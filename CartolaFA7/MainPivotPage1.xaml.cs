@@ -103,21 +103,9 @@ namespace CartolaFA7.View
 
         private void Client_ListarJogadores(object sender, OpenReadCompletedEventArgs e)
         {
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Jogador>));
-            var res = (List<Jogador>)serializer.ReadObject(e.Result);
+            List<Destaques> destaques = JsonConvert.DeserializeObject<List<Destaques>>(new StreamReader(e.Result).ReadToEnd());
 
-            listJogadores.ItemsSource = res;
-
-           /*    foreach(Jogador j in res)
-               {
-                   listJogadores.Items.Add(j.Atleta.nome + "\n" 
-                       +"Apelido: "+ j.Atleta.apelido + "\n"
-                       + "Cartoletas: " + j.Atleta.preco_editorial + "\n"
-                       + "Escalações: " + j.escalacoes + "\n"
-                       + "Clube: " + j.clube + "\n"
-                       + "Posição: " + j.posicao + "\n"
-                       );
-               }*/
+            listJogadores.ItemsSource = destaques;
         }
 
         private void btnJogadores_Click(object sender, RoutedEventArgs e)
