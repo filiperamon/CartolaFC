@@ -41,10 +41,10 @@
 
             <phone:PivotItem Header="Datas das Rodadas">
                 <Grid>
-                        
-                  <!--<TextBlockText="{Binding LineOne}"TextWrapping="Wrap"/>
+
+                    <!--<TextBlockText="{Binding LineOne}"TextWrapping="Wrap"/>
                   <TextBlockText="{Binding LineTwo}"TextWrapping="Wrap"/>-->
-                    
+
                     <StackPanel>
                         <ListBox Name="listRodadas" ItemsSource="{Binding}" Height="535" >
                             <ListBox.ItemTemplate>
@@ -54,7 +54,7 @@
                                             <TextBlock Text="Rodada "/>
                                             <TextBlock Text="{Binding rodada_id}" TextWrapping="Wrap"/>
                                         </StackPanel>
-                                        
+
                                         <StackPanel Orientation="Horizontal" Margin="2,2,2,5" HorizontalAlignment="Center">
                                             <TextBlock Name="tbInicio" Text="{Binding inicio,  StringFormat='{}{0:MM/dd/yy h:mm tt}'}"/>
                                             <TextBlock Text=" Às " TextWrapping="Wrap"/>
@@ -89,15 +89,29 @@
                                         <TextBlock Text="{Binding LocalPartida}" FontSize="20" Margin="0,0,20,0"></TextBlock>
                                         <TextBlock Text="{Binding DataPartida}"  FontSize="20"></TextBlock>
                                     </StackPanel>
-                                </StackPanel>                                
+                                </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </StackPanel>
             </phone:PivotItem>
 
-            <phone:PivotItem Header="Maior Pontuador">
-                <Grid/>
+            <phone:PivotItem Header="Mito da Rodada">
+                <StackPanel>
+                    <Button Name="btnMitoRodada" Content="Mostrar Mito da Rodada" Click="btnMitoRodada_Click"/>
+                    <StackPanel x:Name="stkMito" Tap="stkMito_Tap">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Name="imageFotoPerfil" Width="150"/>
+                            <TextBlock Name="txtMitoRodada" FontSize="30" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Name="imageFotoTime" Width="150"/>
+                            <TextBlock Name="txtTimeMito" FontSize="30" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        <TextBlock Name="txtMediaCartoletas" FontSize="30"/>
+                        <TextBlock Name="txtmediaPontos" FontSize="30" />
+                    </StackPanel>
+                </StackPanel>
             </phone:PivotItem>
 
             <phone:PivotItem Header="Jogadores Mais Escalados">

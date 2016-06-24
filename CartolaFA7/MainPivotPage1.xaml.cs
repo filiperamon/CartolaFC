@@ -13,12 +13,13 @@ using System.Runtime.Serialization.Json;
 using CartolaFA7.Model;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace CartolaFA7.View
 {
     public partial class MainPivotPage1 : PhoneApplicationPage
     {
-        private int mes;
+        String slugMito = null;
         public MainPivotPage1()
         {
             InitializeComponent();
@@ -77,17 +78,7 @@ namespace CartolaFA7.View
         {
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(StatusMercadoJson));
             StatusMercadoJson res = (StatusMercadoJson)serializer.ReadObject(e.Result);
-         /*   if(res.fechamento.dia < 10)
-            {
-                string conc = "0" + res.fechamento.dia;
-                res.fechamento.dia = Convert.ToInt32(conc);
-            }
-            if (res.fechamento.mes < 10)
-            {
-                string conc = "0" + res.fechamento.mes;
-                mes = Convert.ToInt32(conc);
-                MessageBox.Show("" + mes);
-            }*/
+     
             lblStatusMercado.Text = String.Format("Rodada Atual = {0}\nTimes Escalados = {1}\nData de Fechamento = {2}/{3}/{4}\nHora de Fechamento= {5}:{6}",
                     res.rodada_atual, res.times_escalados, res.fechamento.dia.ToString("00"), res.fechamento.mes.ToString("00"), res.fechamento.ano, 
                     res.fechamento.hora.ToString("00"), res.fechamento.minuto.ToString("00"));
@@ -205,6 +196,37 @@ namespace CartolaFA7.View
 
             NavigationService.Navigate(new Uri("/DetalhesTime.xaml?slugTime=" + time.slug, UriKind.Relative));
 
+        }
+
+        private void btnMitoRodada_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient client = new WebClient();
+            client.OpenReadCompleted += MitoRodada_OpenReadCompleted1; ; ;
+            Uri uri = new Uri("https://api.cartolafc.globo.com/pos-rodada/destaques", UriKind.Absolute);
+            client.OpenReadAsync(uri);
+        }
+
+        private void MitoRodada_OpenReadCompleted1(object sender, OpenReadCompletedEventArgs e)
+        {
+           /* DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Jogador>));
+            var res = (RootObject)serializer.ReadObject(e.Result);*/
+
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(RootObject));
+            RootObject res = (RootObject)serializer.ReadObject(e.Result);
+
+            txtMitoRodada.Text = res.mito_rodada.nome_cartola;
+            imageFotoPerfil.Source = new BitmapImage(new Uri(res.mito_rodada.foto_perfil, UriKind.Absolute));
+            txtTimeMito.Text = res.mito_rodada.nome;
+            imageFotoTime.Source = new BitmapImage(new Uri(res.mito_rodada.url_escudo_png, UriKind.Absolute));
+            txtMediaCartoletas.Text = String.Format("Cartoletas: {0}\nPontos: {1}",
+                res.media_cartoletas.ToString("00.00"), res.media_pontos.ToString("00.00"));
+            slugMito = res.mito_rodada.slug;
+        }
+
+        private void stkMito_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+           // MitoRodada mito = (MitoRodada)(sender as FrameworkElement).DataContext;
+            NavigationService.Navigate(new Uri("/DetalhesTime.xaml?slugTime=" + slugMito, UriKind.Relative));
         }
     }
 }

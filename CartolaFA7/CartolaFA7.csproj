@@ -105,6 +105,7 @@
     <Compile Include="Model\DetalhesAtleta.cs" />
     <Compile Include="Model\DetalhesTime.cs" />
     <Compile Include="Model\Escudos.cs" />
+    <Compile Include="Model\MitoRodada.cs" />
     <Compile Include="Model\ModeloPartida.cs" />
     <Compile Include="Model\Partida.cs" />
     <Compile Include="Model\PartidaProxRodada.cs" />
