@@ -98,8 +98,9 @@
 
             <phone:PivotItem Header="Mito da Rodada">
                 <StackPanel>
+                <StackPanel>
                     <Button Name="btnMitoRodada" Content="Mostrar Mito da Rodada" Click="btnMitoRodada_Click"/>
-                    <StackPanel x:Name="stkMito" Tap="stkMito_Tap">
+                    <StackPanel x:Name="stkMito">
                         <StackPanel Orientation="Horizontal">
                             <Image Name="imageFotoPerfil" Width="150"/>
                             <TextBlock Name="txtMitoRodada" FontSize="30" HorizontalAlignment="Center"/>
@@ -111,6 +112,9 @@
                         <TextBlock Name="txtMediaCartoletas" FontSize="30"/>
                         <TextBlock Name="txtmediaPontos" FontSize="30" />
                     </StackPanel>
+                    
+                </StackPanel>
+                <Button Name="btnDetalhesTime" Content="Detalhes do Mito da Rodada" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed" Click="btnDetalhesTime_Click" Margin="50"/>
                 </StackPanel>
             </phone:PivotItem>
 

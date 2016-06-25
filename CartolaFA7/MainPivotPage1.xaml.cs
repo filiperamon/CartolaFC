@@ -208,9 +208,6 @@ namespace CartolaFA7.View
 
         private void MitoRodada_OpenReadCompleted1(object sender, OpenReadCompletedEventArgs e)
         {
-           /* DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Jogador>));
-            var res = (RootObject)serializer.ReadObject(e.Result);*/
-
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(RootObject));
             RootObject res = (RootObject)serializer.ReadObject(e.Result);
 
@@ -221,11 +218,11 @@ namespace CartolaFA7.View
             txtMediaCartoletas.Text = String.Format("Cartoletas: {0}\nPontos: {1}",
                 res.media_cartoletas.ToString("00.00"), res.media_pontos.ToString("00.00"));
             slugMito = res.mito_rodada.slug;
+            btnDetalhesTime.Visibility = System.Windows.Visibility.Visible;
         }
 
-        private void stkMito_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void btnDetalhesTime_Click(object sender, RoutedEventArgs e)
         {
-           // MitoRodada mito = (MitoRodada)(sender as FrameworkElement).DataContext;
             NavigationService.Navigate(new Uri("/DetalhesTime.xaml?slugTime=" + slugMito, UriKind.Relative));
         }
     }
