@@ -304,7 +304,7 @@ namespace CartolaFA7.View
                         posicoesRodada.Add(posicaoRodada);
                     }
 
-                    pontuacao.ItemsSource = posicoesRodada;
+                    pontuacao.ItemsSource = posicoesRodada.OrderBy(p => p.pontuacao);
                 }
             }
             catch(Exception ex)
