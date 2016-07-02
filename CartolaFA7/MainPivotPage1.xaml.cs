@@ -297,8 +297,8 @@ namespace CartolaFA7.View
 
                         posicaoRodada.apelido = atleta.Value.apelido;
                         posicaoRodada.pontuacao = atleta.Value.pontuacao;
-                        posicaoRodada.clube = res.clubes.Where(p => p.Value.id == atleta.Value.clube_id).FirstOrDefault().ToString();
-                        posicaoRodada.posicao = res.posicoes.Where(p => p.Value.id == atleta.Value.posicao_id).FirstOrDefault().ToString();
+                        posicaoRodada.clube = res.clubes.Where(p => p.Value.id == atleta.Value.clube_id).FirstOrDefault().Value.Nome;
+                        posicaoRodada.posicao = res.posicoes.Where(p => p.Value.id == atleta.Value.posicao_id).FirstOrDefault().Value.nome;
 
                         posicoesRodada.Add(posicaoRodada);
                     }

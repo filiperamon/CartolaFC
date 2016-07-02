@@ -107,7 +107,7 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical" Margin="0,0,0,20">
-                                    <StackPanel Width="200" Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical">
                                         <TextBlock FontSize="30" Text="{Binding apelido}"></TextBlock>
                                         <TextBlock FontSize="30" Text="{Binding pontuacao}"></TextBlock>
                                     </StackPanel>
