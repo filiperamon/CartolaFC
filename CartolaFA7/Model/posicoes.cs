@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CartolaFA7.Model
 {
-    class Posicoes
+    public class Posicoes
     {
         public int id { get; set; }
         public string nome { get; set; }

@@ -19,10 +19,17 @@
         <phone:Pivot Title="CartolaFA7">
 
             <phone:PivotItem Header="Status do Mercado">
+
                 <StackPanel>
                     <Button Name="btnStatusMercado" Content="Status Mercado" Click="btnStatusMercado_Click"/>
-                    <TextBlock Name="lblStatusMercado"/>
+
+                    <Border Name="brdBrush" BorderBrush="#FF0D7EF0" BorderThickness="1.5" Width="430" Margin="10" Padding="5" Visibility="Collapsed">
+                        <StackPanel>
+                            <TextBlock Name="lblStatusMercado"/>
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
+
             </phone:PivotItem>
 
 
@@ -41,10 +48,6 @@
 
             <phone:PivotItem Header="Datas das Rodadas">
                 <Grid>
-
-                    <!--<TextBlockText="{Binding LineOne}"TextWrapping="Wrap"/>
-                  <TextBlockText="{Binding LineTwo}"TextWrapping="Wrap"/>-->
-
                     <StackPanel>
                         <ListBox Name="listRodadas" ItemsSource="{Binding}" Height="535" >
                             <ListBox.ItemTemplate>
@@ -118,61 +121,66 @@
             </phone:PivotItem>
             <phone:PivotItem Header="Mito da Rodada">
                 <StackPanel>
-                <StackPanel>
-                    <Button Name="btnMitoRodada" Content="Mostrar Mito da Rodada" Click="btnMitoRodada_Click"/>
-                    <StackPanel x:Name="stkMito">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Name="imageFotoPerfil" Width="150"/>
-                            <TextBlock Name="txtMitoRodada" FontSize="30" HorizontalAlignment="Center"/>
+                    <StackPanel>
+                        <Button Name="btnMitoRodada" Content="Mostrar Mito da Rodada" Click="btnMitoRodada_Click"/>
+                        <StackPanel x:Name="stkMito">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Name="imageFotoPerfil" Width="150"/>
+                                <TextBlock Name="txtMitoRodada" FontSize="30" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Name="imageFotoTime" Width="150"/>
+                                <TextBlock Name="txtTimeMito" FontSize="30" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <TextBlock Name="txtMediaCartoletas" FontSize="30"/>
+                            <TextBlock Name="txtmediaPontos" FontSize="30" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Name="imageFotoTime" Width="150"/>
-                            <TextBlock Name="txtTimeMito" FontSize="30" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                        <TextBlock Name="txtMediaCartoletas" FontSize="30"/>
-                        <TextBlock Name="txtmediaPontos" FontSize="30" />
+
                     </StackPanel>
-                    
-                </StackPanel>
-                <Button Name="btnDetalhesTime" Content="Detalhes do Mito da Rodada" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed" Click="btnDetalhesTime_Click"/>
+                    <Button Name="btnDetalhesTime" Content="Detalhes do Mito da Rodada" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed" Click="btnDetalhesTime_Click"/>
                 </StackPanel>
             </phone:PivotItem>
 
             <phone:PivotItem Header="Mais Escalados">
                 <StackPanel>
                     <Button Name="btnListarJogadores" Content="Listar Jogadores" Click="btnListarJogadores_Click"/>
+
+
                     <ListBox Name="listJogadores" Height="529" ItemsSource="{Binding}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{Binding Atleta.nome}" FontSize="25"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Apelido: " FontSize="20"/>
-                                        <TextBlock Text="{Binding Atleta.apelido}" FontSize="20"/>
+                                <Border  BorderBrush="#FF0D7EF0" BorderThickness="1.5" Width="430" Margin="10" Padding="5">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Atleta.nome}" FontSize="25"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Apelido: " FontSize="20"/>
+                                            <TextBlock Text="{Binding Atleta.apelido}" FontSize="20"/>
+                                        </StackPanel>
+                                        <Image Source="{Binding Atleta.foto}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Cartoletas: " FontSize="20"/>
+                                            <TextBlock Text="{Binding Atleta.preco_editorial}" FontSize="20"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Escalações: " FontSize="20"/>
+                                            <TextBlock Text="{Binding escalacoes}" FontSize="20"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Posição: " FontSize="20"/>
+                                            <TextBlock Text="{Binding posicao}" FontSize="20"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Clube: " FontSize="20"/>
+                                            <TextBlock Text="{Binding clube}" FontSize="20"/>
+                                            <Image Source="{Binding escudo_clube}" Margin="100,0"/>
+                                        </StackPanel>
+                                        <TextBlock/>
                                     </StackPanel>
-                                    <Image Source="{Binding Atleta.foto}"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Cartoletas: " FontSize="20"/>
-                                        <TextBlock Text="{Binding Atleta.preco_editorial}" FontSize="20"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Escalações: " FontSize="20"/>
-                                        <TextBlock Text="{Binding escalacoes}" FontSize="20"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Posição: " FontSize="20"/>
-                                        <TextBlock Text="{Binding posicao}" FontSize="20"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Clube: " FontSize="20"/>
-                                        <TextBlock Text="{Binding clube}" FontSize="20"/>
-                                        <Image Source="{Binding escudo_clube}" Margin="100,0"/>
-                                    </StackPanel>
-                                    <TextBlock/>
-                                </StackPanel>
+                                </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+
                 </StackPanel>
             </phone:PivotItem>
 
@@ -183,20 +191,28 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <StackPanel Width="200" Orientation="Vertical">
-                                        <Image HorizontalAlignment="Left" Height="60" Source="{Binding UrlEscudoMandante}"></Image>
-                                        <TextBlock FontSize="30" Text="{Binding NomeMandante}"></TextBlock>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Posição: "/>
-                                            <TextBlock Text="{Binding PosicaoMandante}"/>
-                                        </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <Border  BorderBrush="#FF0D7EF0" BorderThickness="1.5" Width="430" Margin="10" Padding="5">
+                                            <StackPanel>
+                                                <Image HorizontalAlignment="Left" Height="60" Source="{Binding UrlEscudoMandante}"></Image>
+                                                <TextBlock FontSize="30" Text="{Binding NomeMandante}"></TextBlock>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Posição: "/>
+                                                    <TextBlock Text="{Binding PosicaoMandante}"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
                                         <TextBlock/>
-                                        <Image HorizontalAlignment="Left" Width="60" Height="60" Source="{Binding UrlEscudoVisitante}"></Image>
-                                        <TextBlock FontSize="30" Text="{Binding NomeVisitante}"></TextBlock>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Posição: "/>
-                                            <TextBlock Text="{Binding PosicaoVisitante}"/>
-                                        </StackPanel>
+                                        <Border  BorderBrush="#FF0D7EF0" BorderThickness="1.5" Width="430" Margin="10" Padding="5">
+                                            <StackPanel>
+                                                <Image HorizontalAlignment="Left" Width="60" Height="60" Source="{Binding UrlEscudoVisitante}"></Image>
+                                                <TextBlock FontSize="30" Text="{Binding NomeVisitante}"></TextBlock>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Posição: "/>
+                                                    <TextBlock Text="{Binding PosicaoVisitante}"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
                                         <TextBlock/>
                                     </StackPanel>
                                 </StackPanel>
@@ -206,10 +222,44 @@
                 </StackPanel>
             </phone:PivotItem>
 
-            <phone:PivotItem Header="Jogadores" >
-                <StackPanel>
+            <phone:PivotItem Header="Jogadores Status" >
+                <StackPanel VerticalAlignment="Bottom">
+                
+                <ListBox Name="listJogadoresParticipantes" ItemsSource="{Binding}" Height="500">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                                <Border BorderBrush="#FF0D7EF0" BorderThickness="1.5" Width="420" Margin="10" Padding="5">
+                                    <StackPanel  Orientation="Horizontal" Margin="0,0,0,0">
+                                        <StackPanel  Orientation="Vertical" Margin="0,0,0,0" >
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Nome: "/>
+                                                <TextBlock Text="{Binding nome}" VerticalAlignment="Center" FontSize="20"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Apelido: "/>
+                                                <TextBlock Text="{Binding apelido}" VerticalAlignment="Center" FontSize="20"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Time: "/>
+                                                <TextBlock Text="{Binding ClubeNome}" VerticalAlignment="Center" FontSize="20"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Posição: "/>
+                                                <TextBlock Text="{Binding Posicao}" VerticalAlignment="Center" FontSize="20"/>
+                                            </StackPanel>
+                                            <StackPanel  Orientation="Horizontal" >
+                                                <TextBlock Text="Status: " VerticalAlignment="Center" FontSize="25" />
+                                                <TextBlock Text="{Binding Status}" VerticalAlignment="Center" FontSize="25" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                   </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel VerticalAlignment="Bottom">
                     <Button Name="btnJogadores" Content="Jogadores Participantes" Click="btnJogadores_Click"/>
-                    <ListBox Name="listJogadoresParticipantes" Height="529" />
+                </StackPanel>
                 </StackPanel>
             </phone:PivotItem>
 

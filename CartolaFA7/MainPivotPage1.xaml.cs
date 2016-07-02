@@ -86,6 +86,8 @@ namespace CartolaFA7.View
             lblStatusMercado.Text = String.Format("Rodada Atual = {0}\nTimes Escalados = {1}\nData de Fechamento = {2}/{3}/{4}\nHora de Fechamento= {5}:{6}",
                     res.rodada_atual, res.times_escalados, res.fechamento.dia.ToString("00"), res.fechamento.mes.ToString("00"), res.fechamento.ano, 
                     res.fechamento.hora.ToString("00"), res.fechamento.minuto.ToString("00"));
+
+            brdBrush.Visibility = System.Windows.Visibility.Visible; 
         }
 
         private void btnListarJogadores_Click(object sender, RoutedEventArgs e)
@@ -113,15 +115,29 @@ namespace CartolaFA7.View
 
         private void client_OpenReadCompletedJogadoresParticipantes(object sender, OpenReadCompletedEventArgs e)
         {
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ListaAtletas));
-            var res = (ListaAtletas)serializer.ReadObject(e.Result);
 
-            foreach (var item in res.atletas)
+            var atletas = JsonConvert.DeserializeObject<ListaAtletas>(new StreamReader(e.Result).ReadToEnd());
+
+            var status = atletas.status;
+            var times = atletas.clubes;
+            var posicoes = atletas.posicoes;
+
+            foreach (var atleta in atletas.atletas)
             {
-                listJogadoresParticipantes.Items.Add(item.nome + "\n"
-                    + "Apelido: " + item.apelido + "\n\n"                                     
-                    );
+                var nomeStatus = status[atleta.status_id].nome;
+                atleta.Status = nomeStatus.Equals("Nulo") ? "Não relacionado" : nomeStatus;
+                atleta.ClubeNome = times[atleta.clube_id].Nome;
+                atleta.Posicao = posicoes[atleta.posicao_id].nome;
             }
+
+            listJogadoresParticipantes.ItemsSource = atletas.atletas;
+
+            //foreach (var item in res.atletas)
+            //{
+            //    listJogadoresParticipantes.Items.Add(item.nome + "\n"
+            //        + "Apelido: " + item.apelido + "\n\n"                                     
+            //        );
+            //}
 
         }
 
