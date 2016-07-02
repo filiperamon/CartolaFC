@@ -117,20 +117,21 @@ namespace CartolaFA7.View
         {
 
             var atletas = JsonConvert.DeserializeObject<ListaAtletas>(new StreamReader(e.Result).ReadToEnd());
+            var sorted = atletas.atletas.OrderBy(m => m.nome.Trim()).ThenBy(m => m.apelido.Trim()).ToList();
 
             var status = atletas.status;
             var times = atletas.clubes;
             var posicoes = atletas.posicoes;
 
-            foreach (var atleta in atletas.atletas)
+            foreach (var atleta in sorted)
             {
                 var nomeStatus = status[atleta.status_id].nome;
                 atleta.Status = nomeStatus.Equals("Nulo") ? "Não relacionado" : nomeStatus;
                 atleta.ClubeNome = times[atleta.clube_id].Nome;
                 atleta.Posicao = posicoes[atleta.posicao_id].nome;
             }
-
-            listJogadoresParticipantes.ItemsSource = atletas.atletas;
+            
+            listJogadoresParticipantes.ItemsSource = sorted;
 
             //foreach (var item in res.atletas)
             //{
