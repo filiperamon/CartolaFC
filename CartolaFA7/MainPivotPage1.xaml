@@ -52,18 +52,20 @@
                         <ListBox Name="listRodadas" ItemsSource="{Binding}" Height="535" >
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Vertical" Margin="2,2,2,10">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Rodada "/>
-                                            <TextBlock Text="{Binding rodada_id}" TextWrapping="Wrap"/>
-                                        </StackPanel>
+                                    <Border  BorderBrush="#FF0D7EF0" BorderThickness="1.5" Width="430" Margin="10" Padding="5">
+                                        <StackPanel Orientation="Vertical" Margin="2,2,2,10">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Rodada "/>
+                                                <TextBlock Text="{Binding rodada_id}" TextWrapping="Wrap"/>
+                                            </StackPanel>
 
-                                        <StackPanel Orientation="Horizontal" Margin="2,2,2,5" HorizontalAlignment="Center">
-                                            <TextBlock Name="tbInicio" Text="{Binding inicio,  StringFormat='{}{0:MM/dd/yy h:mm tt}'}"/>
-                                            <TextBlock Text=" Às " TextWrapping="Wrap"/>
-                                            <TextBlock Name="tbFim" Text="{Binding fim, StringFormat='{}{0:MM/dd/yy h:mm tt}'}" />
+                                            <StackPanel Orientation="Horizontal" Margin="2,2,2,5" HorizontalAlignment="Center">
+                                                <TextBlock Name="tbInicio" Text="{Binding inicio,  StringFormat='{}{0:MM/dd/yy h:mm tt}'}"/>
+                                                <TextBlock Text=" Às " TextWrapping="Wrap"/>
+                                                <TextBlock Name="tbFim" Text="{Binding fim, StringFormat='{}{0:MM/dd/yy h:mm tt}'}" />
+                                            </StackPanel>
                                         </StackPanel>
-                                    </StackPanel>
+                                    </Border>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
