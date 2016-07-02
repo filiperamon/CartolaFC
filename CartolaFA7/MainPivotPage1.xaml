@@ -161,7 +161,7 @@
                                         <Image Source="{Binding Atleta.foto}"/>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Cartoletas: " FontSize="20"/>
-                                            <TextBlock Text="{Binding Atleta.preco_editorial}" FontSize="20"/>
+                                            <TextBlock Text="{Binding Atleta.preco_editorial, StringFormat=' {0:N} '}" FontSize="20"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Escalações: " FontSize="20"/>
