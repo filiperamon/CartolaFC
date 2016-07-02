@@ -86,6 +86,8 @@ namespace CartolaFA7.View
             lblStatusMercado.Text = String.Format("Rodada Atual = {0}\nTimes Escalados = {1}\nData de Fechamento = {2}/{3}/{4}\nHora de Fechamento= {5}:{6}",
                     res.rodada_atual, res.times_escalados, res.fechamento.dia.ToString("00"), res.fechamento.mes.ToString("00"), res.fechamento.ano, 
                     res.fechamento.hora.ToString("00"), res.fechamento.minuto.ToString("00"));
+
+            brdBrush.Visibility = System.Windows.Visibility.Visible; 
         }
 
         private void btnListarJogadores_Click(object sender, RoutedEventArgs e)
