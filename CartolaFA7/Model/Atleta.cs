@@ -24,6 +24,10 @@ namespace CartolaFA7.Model
         public int jogos_num { get; set; }
         public PartidaProxRodada partida { get; set; }
         public Scout scout { get; set; }
+
+        public string Status { get; set; }
+        public string ClubeNome { get; set; }
+        public string Posicao { get; set; }
         public double pontuacao { get; set; }
     }
 }

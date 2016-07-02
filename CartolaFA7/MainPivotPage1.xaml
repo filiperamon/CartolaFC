@@ -206,10 +206,44 @@
                 </StackPanel>
             </phone:PivotItem>
 
-            <phone:PivotItem Header="Jogadores" >
-                <StackPanel>
+            <phone:PivotItem Header="Jogadores Status" >
+                <StackPanel VerticalAlignment="Bottom">
+                
+                <ListBox Name="listJogadoresParticipantes" ItemsSource="{Binding}" Height="500">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                                <Border BorderBrush="#FF0D7EF0" BorderThickness="1.5" Width="420" Margin="10" Padding="5">
+                                    <StackPanel  Orientation="Horizontal" Margin="0,0,0,0">
+                                        <StackPanel  Orientation="Vertical" Margin="0,0,0,0" >
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Nome: "/>
+                                                <TextBlock Text="{Binding nome}" VerticalAlignment="Center" FontSize="20"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Apelido: "/>
+                                                <TextBlock Text="{Binding apelido}" VerticalAlignment="Center" FontSize="20"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Time: "/>
+                                                <TextBlock Text="{Binding ClubeNome}" VerticalAlignment="Center" FontSize="20"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Posição: "/>
+                                                <TextBlock Text="{Binding Posicao}" VerticalAlignment="Center" FontSize="20"/>
+                                            </StackPanel>
+                                            <StackPanel  Orientation="Horizontal" >
+                                                <TextBlock Text="Status: " VerticalAlignment="Center" FontSize="25" />
+                                                <TextBlock Text="{Binding Status}" VerticalAlignment="Center" FontSize="25" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                   </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel VerticalAlignment="Bottom">
                     <Button Name="btnJogadores" Content="Jogadores Participantes" Click="btnJogadores_Click"/>
-                    <ListBox Name="listJogadoresParticipantes" Height="529" />
+                </StackPanel>
                 </StackPanel>
             </phone:PivotItem>
 

@@ -113,15 +113,29 @@ namespace CartolaFA7.View
 
         private void client_OpenReadCompletedJogadoresParticipantes(object sender, OpenReadCompletedEventArgs e)
         {
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ListaAtletas));
-            var res = (ListaAtletas)serializer.ReadObject(e.Result);
 
-            foreach (var item in res.atletas)
+            var atletas = JsonConvert.DeserializeObject<ListaAtletas>(new StreamReader(e.Result).ReadToEnd());
+
+            var status = atletas.status;
+            var times = atletas.clubes;
+            var posicoes = atletas.posicoes;
+
+            foreach (var atleta in atletas.atletas)
             {
-                listJogadoresParticipantes.Items.Add(item.nome + "\n"
-                    + "Apelido: " + item.apelido + "\n\n"                                     
-                    );
+                var nomeStatus = status[atleta.status_id].nome;
+                atleta.Status = nomeStatus.Equals("Nulo") ? "Não relacionado" : nomeStatus;
+                atleta.ClubeNome = times[atleta.clube_id].Nome;
+                atleta.Posicao = posicoes[atleta.posicao_id].nome;
             }
+
+            listJogadoresParticipantes.ItemsSource = atletas.atletas;
+
+            //foreach (var item in res.atletas)
+            //{
+            //    listJogadoresParticipantes.Items.Add(item.nome + "\n"
+            //        + "Apelido: " + item.apelido + "\n\n"                                     
+            //        );
+            //}
 
         }
 
