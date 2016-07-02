@@ -29,6 +29,10 @@ namespace CartolaFA7.View
             Uri uri = new Uri("https://api.cartolafc.globo.com/partidas", UriKind.Absolute);
             partida.OpenReadAsync(uri);
         }
+        private void AtualizaListaClubes(List<ModeloPartida> clubes)
+        {
+            listClubesParticipantes.ItemsSource = clubes;
+        }
 
         private void atualizaListaJogosRodada(List<ModeloPartida> partidas)
         {
@@ -40,6 +44,7 @@ namespace CartolaFA7.View
             Partidas res = JsonConvert.DeserializeObject<Partidas>(new StreamReader(e.Result).ReadToEnd());
 
             List<ModeloPartida> listaPartida = new List<ModeloPartida>();
+            
 
             foreach (var partida in res.partidas)
             {
@@ -60,7 +65,6 @@ namespace CartolaFA7.View
                 modelo.DataPartida = diaPardida[2] + "/" + diaPardida[1] + "/" + diaPardida[0] + " " + dataPartida[1];
 
                 listaPartida.Add(modelo);
-
             }
 
             atualizaListaJogosRodada(listaPartida);
@@ -224,6 +228,38 @@ namespace CartolaFA7.View
         private void btnDetalhesTime_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/DetalhesTime.xaml?slugTime=" + slugMito, UriKind.Relative));
+        }
+
+        private void btnClubes_Click(object sender, RoutedEventArgs e)
+        {
+             WebClient clube = new WebClient();
+             clube.OpenReadCompleted += Clube_OpenReadCompleted; ;
+             Uri uri = new Uri("https://api.cartolafc.globo.com/partidas", UriKind.Absolute);
+             clube.OpenReadAsync(uri);
+        }
+
+        private void Clube_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
+        {
+            Partidas res = JsonConvert.DeserializeObject<Partidas>(new StreamReader(e.Result).ReadToEnd());
+            List<ModeloPartida> listaClubes = new List<ModeloPartida>();
+
+            foreach (var partida in res.partidas)
+            {
+
+                Clube mandante = res.clubes.FirstOrDefault(c => c.Value.id == partida.ClubeMandanteId).Value;
+                Clube visitante = res.clubes.FirstOrDefault(c => c.Value.id == partida.ClubeVisitanteId).Value;
+
+                ModeloPartida modeloClubes = new ModeloPartida();
+                modeloClubes.NomeMandante = mandante.Nome;
+                modeloClubes.NomeVisitante = visitante.Nome;
+                modeloClubes.UrlEscudoMandante = mandante.Escudos.Url_45_X_45;
+                modeloClubes.UrlEscudoVisitante = visitante.Escudos.Url_45_X_45;
+                modeloClubes.PosicaoMandante = mandante.Posicao;
+                modeloClubes.PosicaoVisitante = visitante.Posicao;
+
+                listaClubes.Add(modeloClubes);
+            }
+            AtualizaListaClubes(listaClubes);
         }
     }
 }

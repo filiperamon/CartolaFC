@@ -157,7 +157,33 @@
             </phone:PivotItem>
 
             <phone:PivotItem Header="Clubes">
-                <Grid/>
+                <StackPanel>
+                    <Button Name="btnClubes" Content="Clubes Participantes" Click="btnClubes_Click"/>
+                    <ListBox Name="listClubesParticipantes" ItemsSource="{Binding}" Height="500">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <StackPanel Width="200" Orientation="Vertical">
+                                        <Image HorizontalAlignment="Left" Height="60" Source="{Binding UrlEscudoMandante}"></Image>
+                                        <TextBlock FontSize="30" Text="{Binding NomeMandante}"></TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Posição: "/>
+                                            <TextBlock Text="{Binding PosicaoMandante}"/>
+                                        </StackPanel>
+                                        <TextBlock/>
+                                        <Image HorizontalAlignment="Left" Width="60" Height="60" Source="{Binding UrlEscudoVisitante}"></Image>
+                                        <TextBlock FontSize="30" Text="{Binding NomeVisitante}"></TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Posição: "/>
+                                            <TextBlock Text="{Binding PosicaoVisitante}"/>
+                                        </StackPanel>
+                                        <TextBlock/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
             </phone:PivotItem>
 
             <phone:PivotItem Header="Jogadores" >
