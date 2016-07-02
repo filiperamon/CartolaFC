@@ -95,7 +95,27 @@
                     </ListBox>
                 </StackPanel>
             </phone:PivotItem>
-
+            <phone:PivotItem Header="Pontuação">
+                <StackPanel>
+                    <Button Name="btnPontuacao" Content="Pontuação da Rodada" Click="btnPontuacao_Click"/>
+                    <ListBox Name="pontuacao" ItemsSource="{Binding}" Height="599">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+                                    <StackPanel Width="200" Orientation="Horizontal">
+                                        <TextBlock FontSize="30" Text="{Binding apelido}"></TextBlock>
+                                        <TextBlock FontSize="30" Text="{Binding pontuacao}"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding posicao}" FontSize="20" Margin="0,0,20,0"></TextBlock>
+                                        <TextBlock Text="{Binding clube}"  FontSize="20"></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </phone:PivotItem>
             <phone:PivotItem Header="Mito da Rodada">
                 <StackPanel>
                 <StackPanel>

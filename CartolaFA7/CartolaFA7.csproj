@@ -110,6 +110,8 @@
     <Compile Include="Model\Partida.cs" />
     <Compile Include="Model\PartidaProxRodada.cs" />
     <Compile Include="Model\Partidas.cs" />
+    <Compile Include="Model\PosicaoRodada.cs" />
+    <Compile Include="Model\RetornoPosicaoDaRodada.cs" />
     <Compile Include="Model\Rodada.cs" />
     <Compile Include="Model\ListaPatrocinadores.cs" />
     <Compile Include="Model\Patrocinador.cs" />

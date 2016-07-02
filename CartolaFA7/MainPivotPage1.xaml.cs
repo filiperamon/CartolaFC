@@ -261,5 +261,44 @@ namespace CartolaFA7.View
             }
             AtualizaListaClubes(listaClubes);
         }
+
+        private void btnPontuacao_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient clube = new WebClient();
+            clube.OpenReadCompleted += Clube_OpenReadCompleted1;
+            Uri uri = new Uri("https://api.cartolafc.globo.com/atletas/pontuados", UriKind.Absolute);
+            clube.OpenReadAsync(uri);
+        }
+
+        private void Clube_OpenReadCompleted1(object sender, OpenReadCompletedEventArgs e)
+        {
+            string mock = "";
+            try
+            {
+                RetornoPosicaoDaRodada res = JsonConvert.DeserializeObject<RetornoPosicaoDaRodada>(new StreamReader(e.Result).ReadToEnd());
+                if (res.atletas.Count > 0)
+                {
+                    List<PosicaoRodada> posicoesRodada = new List<PosicaoRodada>();
+
+                    foreach (var atleta in res.atletas)
+                    {
+                        PosicaoRodada posicaoRodada = new PosicaoRodada();
+
+                        posicaoRodada.apelido = atleta.Value.apelido;
+                        posicaoRodada.pontuacao = atleta.Value.pontuacao;
+                        posicaoRodada.clube = res.clubes.Where(p => p.Value.id == atleta.Value.clube_id).FirstOrDefault().ToString();
+                        posicaoRodada.posicao = res.posicoes.Where(p => p.Value.id == atleta.Value.posicao_id).FirstOrDefault().ToString();
+
+                        posicoesRodada.Add(posicaoRodada);
+                    }
+
+                    pontuacao.ItemsSource = posicoesRodada;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Aguarde! Parciais não estão disponíveis.");
+            }
+        }
     }
 }
