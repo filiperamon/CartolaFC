@@ -196,26 +196,14 @@
                                     <StackPanel Orientation="Vertical">
                                         <Border  BorderBrush="#FF0D7EF0" BorderThickness="1.5" Width="430" Margin="10" Padding="5">
                                             <StackPanel>
-                                                <Image HorizontalAlignment="Left" Height="60" Source="{Binding UrlEscudoMandante}"></Image>
-                                                <TextBlock FontSize="30" Text="{Binding NomeMandante}"></TextBlock>
+                                                <Image HorizontalAlignment="Left" Height="60" Source="{Binding Escudos.Url_60_X_60}"></Image>
+                                                <TextBlock FontSize="30" Text="{Binding Nome}"></TextBlock>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="Posição: "/>
-                                                    <TextBlock Text="{Binding PosicaoMandante}"/>
+                                                    <TextBlock Text="{Binding Posicao}"/>
                                                 </StackPanel>
                                             </StackPanel>
                                         </Border>
-                                        <TextBlock/>
-                                        <Border  BorderBrush="#FF0D7EF0" BorderThickness="1.5" Width="430" Margin="10" Padding="5">
-                                            <StackPanel>
-                                                <Image HorizontalAlignment="Left" Width="60" Height="60" Source="{Binding UrlEscudoVisitante}"></Image>
-                                                <TextBlock FontSize="30" Text="{Binding NomeVisitante}"></TextBlock>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="Posição: "/>
-                                                    <TextBlock Text="{Binding PosicaoVisitante}"/>
-                                                </StackPanel>
-                                            </StackPanel>
-                                        </Border>
-                                        <TextBlock/>
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>

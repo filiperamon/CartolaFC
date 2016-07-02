@@ -29,7 +29,7 @@ namespace CartolaFA7.View
             Uri uri = new Uri("https://api.cartolafc.globo.com/partidas", UriKind.Absolute);
             partida.OpenReadAsync(uri);
         }
-        private void AtualizaListaClubes(List<ModeloPartida> clubes)
+        private void AtualizaListaClubes(IEnumerable<Clube> clubes)
         {
             listClubesParticipantes.ItemsSource = clubes;
         }
@@ -257,25 +257,21 @@ namespace CartolaFA7.View
         private void Clube_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
         {
             Partidas res = JsonConvert.DeserializeObject<Partidas>(new StreamReader(e.Result).ReadToEnd());
-            List<ModeloPartida> listaClubes = new List<ModeloPartida>();
+            List<Clube> listaClubes = new List<Clube>();
 
-            foreach (var partida in res.partidas)
+            foreach (var clubeHash in res.clubes)
             {
 
-                Clube mandante = res.clubes.FirstOrDefault(c => c.Value.id == partida.ClubeMandanteId).Value;
-                Clube visitante = res.clubes.FirstOrDefault(c => c.Value.id == partida.ClubeVisitanteId).Value;
+                Clube clube = new Clube();
+                clube.Nome = clubeHash.Value.Nome;
+                clube.Posicao = clubeHash.Value.Posicao;
+                clube.Escudos = clubeHash.Value.Escudos;
+                
 
-                ModeloPartida modeloClubes = new ModeloPartida();
-                modeloClubes.NomeMandante = mandante.Nome;
-                modeloClubes.NomeVisitante = visitante.Nome;
-                modeloClubes.UrlEscudoMandante = mandante.Escudos.Url_45_X_45;
-                modeloClubes.UrlEscudoVisitante = visitante.Escudos.Url_45_X_45;
-                modeloClubes.PosicaoMandante = mandante.Posicao;
-                modeloClubes.PosicaoVisitante = visitante.Posicao;
-
-                listaClubes.Add(modeloClubes);
+                listaClubes.Add(clube);
             }
-            AtualizaListaClubes(listaClubes);
+
+            AtualizaListaClubes(listaClubes.OrderBy(c => c.Posicao));
         }
 
         private void btnPontuacao_Click(object sender, RoutedEventArgs e)
