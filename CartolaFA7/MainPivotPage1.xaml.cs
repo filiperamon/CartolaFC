@@ -272,7 +272,6 @@ namespace CartolaFA7.View
 
         private void Clube_OpenReadCompleted1(object sender, OpenReadCompletedEventArgs e)
         {
-            string mock = "";
             try
             {
                 RetornoPosicaoDaRodada res = JsonConvert.DeserializeObject<RetornoPosicaoDaRodada>(new StreamReader(e.Result).ReadToEnd());
